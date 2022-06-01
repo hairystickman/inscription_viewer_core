@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google API fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+
+    <!-- findme to do: tidy up Skfb API CSS -->
+    <link rel="stylesheet" href="css/styles.css" >
+    <link rel="stylesheet" href="css/skfb_texture_swap.css" >
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+
+<!-- findme debug: offline css libraries
+    <link href="js/offline/bootstrap.min.css" rel="stylesheet">
+-->
+
+
+    <title>The King's Chamber: A Prototype</title>
+  </head>
+  <body>
+
+
+
+    <h1 id ="title" class="page-title position-absolute top-0 w-100 p-1 fs-sm">Plate 1</h1>
+
+
+    <!-- ########################
+      scene viewer
+    ######################## -->
+    <div id="viewer-area" class="container-fluid position-relative h-100 p-0 m-0">
+
+
+          <!-- ########################
+            scene selector side bar
+            findme todo: use javascript to move out of the viewer div on small screens
+            OR
+            replace with 'offcanvas from BS'
+            OR
+            redevelop so it can sit as a block above and show hide without overflow issues
+          ######################## -->
+
+          <div id="sidebar" class="sidebar position-absolute top-0 text-ui sidebar-dimensions">
+
+            <div class="sidebar-btn">
+              <button id="btn-toggle-sidebar" type="button" data-toggle="button" class="btn btn-dark pt-3 pb-3 px-5">Scene Selector</button>
+            </div>
+
+              <div class="viewer-skfb">
+                <!-- findme: the gubbins -->
+                  <div id="skfb_frame" >
+                    <!-- this section displays the model via the sketchfab servers -->
+                    <iframe src="" id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="vr"></iframe>
+
+
+
+                    <div id="loading" class="description loading controls">
+                      waiting for it all to load...
+                    </div>
+
+                    <!-- the slider controller -->
+                    <button class="button centre viewer-controls" style= "width:35px; height: 35px;" id="btnFullScreen">
+                      +
+                    </button>
+
+                    <div id = "swap-slider-container-fullscreen" class="viewer-controls swap-slider-container-fullscreen ">
+                      <!--findme todo: styles need fixing -  the contents of this div is moved into the sketchfab api gui  -->
+                      <input type="range" min="25" max="100" value="100" class="swap-slider-fullscreen swap-slider" id="swap-slider">
+                    </div>
+                  </div>
+              </div>
+
+              <!--findme todo: autobuild on load of layers of hotspots-->
+              <div class="scenes container px-0 pt-5 pb-5 m-0 d-flex flex-column text-center text-light h5 text-ui">
+                <span id="about" class="p-3 scene-enabled">About</span>
+                <span id="scene-0" class="p-3 scene-enabled scene-active" data-index-number=0>1 Plate 1</span>
+                <span id="scene-1"class="p-3 scene-enabled" data-index-number=1>2 Plate 2</span>
+                <span id="scene-2" class="p-3 scene-enabled" data-index-number=2>3 Plate 3</span>
+              </div>
+              <div class="grad-top"></div>
+              <div class="grad-bottom"></div>
+<!-- old position of slider
+              <div id = "swap-slider-container" class="slider-container viewer-controls">
+                <input type="range" min="25" max="100" value="100" class="swap-slider" id="swap-slider">
+              </div> -->
+          </div>
+
+
+
+
+      <div id="viewer-inner" class="position-absolute w-100 p-0 m-0 top-0">
+        <div id="container" class="container-fluid position-absolute top-0 left-0 right-0 bottom-0 tab-content p-0 m-0">
+            <!-- container for closeup image viewer -->
+            <div id="osd-container" class="position-absolute top-0 bottom-0 w-100 p-0 m-0 tab-pane show active" role="tabpanel" aria-labelledby="inscription-tab" >
+              <!-- findme todo: paramatize -->
+
+              <!-- The different inscriptions are held in different OS instances (which need a div).
+              This is more efficient for caching data than replacing the layers (possibly?)
+              and avoids some issues within the curtain sync viewer access-->
+
+                <div id="osd-viewer-0" class="container-fluid h-100 w-100 p-0 osdViewer">
+                </div>
+
+                <div id="osd-viewer-1" class="container-fluid h-100 w-100 p-0 osdViewer hidden">
+                </div>
+
+                <div id="osd-viewer-2" class="container-fluid h-100 w-100 p-0 osdViewer hidden">
+                </div>
+
+                <div id="osd-viewer-3" class="container-fluid h-100 w-100 p-0 osdViewer hidden">
+                </div>
+
+                <div id="osd-viewer-4" class="container-fluid h-100 w-100 p-0 osdViewer hidden">
+                </div>
+
+                <div id ="nubbin" class="nubbin"></div>
+
+                <div id="inscription-tools" class="viewer-tools position-absolute bottom-0 start-0 pb-1 text-light">
+
+                  <div class="accordion m-0 d-none" id="accordion-inscription-tools">
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="tools-heading-two">
+                        <button id ="btn-translit" class="accordion-button flex-overide collapsed py-2 px-5 text-center text-light mx-auto"  type="button" data-bs-toggle="collapse" data-bs-target="#tools-collapse-two" aria-expanded="false" aria-controls="tools-collapse-two">
+                          Transliteration and Translation
+                        </button>
+                      </h2>
+                      <!-- findme note: removed the auto collapse by taking out  data-bs-parent="#viewer-tools" -->
+                      <div id="tools-collapse-two" class="accordion-collapse collapse" aria-labelledby="tools-heading-two" >
+                        <div class="accordion-body tools-transliterations px-3 py-2">
+                          <div class="container">
+                            <div id="tools-transliterations" class="row my-5">
+                              <p class= "tools-line"  id="line1">(1) <span class= "fst-italic">Some Text</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                <div id = "layers" class="layers d-flex flex-row text-ui pb-3 pt-1" >
+                  <div class="slider-container w-50">
+                    <div>
+                      illustration
+                    </div>
+                    <input type="range" min="0" max="100" value="0" class="layer-slider" id="layer-slider01">
+                  </div>
+
+                  <div class="slider-container w-50">
+                    <div>
+                      archival photo
+                    </div>
+                    <input type="range" min="0" max="100" value="100" class="layer-slider" id="split-layer-slider01">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- container for historical images -->
+            <div id="osd-gallery-container" class="position-absolute top-0 bottom-0 w-100 p-0 m-0 tab-pane invisible" role="tabpanel" aria-labelledby="gallery-tab">
+              <div id="osd-gallery-viewer" class="container-fluid h-100 w-100 p-0 m-0">
+              </div>
+
+              <div id="gallery-tools" class="viewer-tools position-absolute bottom-0 start-0 pb-1 text-light">
+
+                <div class="accordion m-0" id="accordion-historic-tools">
+                  <div class="accordion-item">
+                        <h2 class="accordion-header" id="historic-tools-heading-two">
+                          <button class="accordion-button flex-overide collapsed py-2 px-5 text-center text-light mx-auto"  type="button" data-bs-toggle="collapse" data-bs-target="#historic-tools-collapse-two" aria-expanded="false" aria-controls="tools-collapse-two">
+                            Comments
+                          </button>
+                        </h2>
+
+                        <!-- findme note: removed the auto collapse by taking out  data-bs-parent="#viewer-tools" -->
+                        <div id="historic-tools-collapse-two" class="accordion-collapse collapse" aria-labelledby="historic-tools-heading-two" >
+                          <div class="accordion-body tools-transliterations px-3 py-2">
+                            <div class="container-sm">
+                                <div id="tools-historic-info" class="row container-lg mt-5 m-2">
+
+                                  <p id="description" class="w-100">
+
+                                  </p>
+                                  <p id="photographer">
+
+                                  </p>
+                                  <p id="date">
+
+                                  </p>
+
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+
+
+            </div>
+
+
+        </div>
+      </div>
+      <ul class="nav nav-pills nav-fill position-absolute w-100" style="bottom:90px" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation" id="inscription-tab-li">
+          <button class="nav-link active rounded-0 fs-5" id="inscription-tab" data-bs-toggle="tab" data-bs-target="#osd-container" type="button" role="tab" aria-controls="osd-container" aria-selected="true">Inscription</button>
+        </li>
+        <li class="nav-item" role="presentation" id="gallery-tab-li">
+          <button class="nav-link rounded-0 fs-5" id="gallery-tab" data-bs-toggle="tab" data-bs-target="#osd-gallery-container" type="button" role="tab" aria-controls="osd-gallery-container" aria-selected="false">Archive</button>
+        </li>
+      </ul>
+
+
+<!-- findme TODO:
+  replace sidebar with built in bootstrap 'offcanvas'
+  note - add a 'save state' object for changing between scenes so it doesn't keep re-setting to defualt views.
+-->
+
+<!-- ########################
+  page text
+######################## -->
+
+
+    <div id="discussion" class="mt-5">
+      <!-- this is the
+      <div id="toggle-button-bar" class="sticky-top"  style="background-color:white">
+
+        <nav>
+          <li><a href=''>The Mastabas of Qar and Idu</a> > <a href=''>Part 2: Idu (G 7102)</a> > <a href=''> Facade </a> </li>
+        </nav>
+      -->
+      <nav class="animate-top toggle-offset text-center">
+        <div id="viewer-toggle" class="btn btn-light active py-2 px-5 sans-bold">Text and Commentary &#9660;</div>
+      </nav>
+    </div>
+
+    <div id="text-container">
+      <!-- findme todo: read info from md file -->
+      <!-- end -->
+    </div>
+
+  </div>
+
+    <footer class="footer w-100 m-0 pt-5 text-light text-center fs-3">
+        <div>logos and branding</div>
+    </footer>
+
+
+      <!-- About Modal -->
+    <div class="modal fade " id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-dark text-light p-5">
+          <div class="modal-header">
+            <h4 class="modal-title" id="aboutModalLabel">About</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+
+            <h3>Origins</h3>
+            <p>
+              How can 3D publishing programs work hand-in-hand to augment traditional 2D print publications?
+            </p>
+            <p>
+              Can one publish a descriptive volume in a modular format that is both visually cohesive and functional and that doesn’t require all of the other component parts to be there first?
+            </p>
+            <p>
+              The effort to answer these questions – a series of ongoing conversations and collaboration between colleagues - has resulted in this open source web-based experimental viewer. It presents a platform for presenting contextual geospatial relationships (in 3D) and examination of their surface details (in 2D).
+            </p>
+            <p>
+              This prototype tool marries 2D imagery and 3D models with available linked data. It is built around the open source <a href="https://iiif.io"> IIIF</a> format, using <a href="https://openseadragon.github.io">OpenSeaDragon</a> and <a href="https://sketchfab.com/developers">SketchFab API</a>, integrating current best practice documentation techniques with archival imagery from the Epigraphic Survey’s Photo Archive, Large Format Collection & <a href="https://oi.uchicago.edu/research/publications/oip/medinet-habu-ix-eighteenth-dynasty-temple-part-i-inner-sanctuaries">OIP 136 Medinet Habu IX. The Eighteenth Dynasty Temple, Part I: The Inner Sanctuaries With Translations of Texts, Commentary, and Glossary</a>
+            </p>
+            <h3>Futures</h3>
+            <p>
+              This is the latest iteration, whose origins can be read about <a href="https://www.digital-epigraphy.com/projects/documenting-the-amenhotep-iii-wall-scene-ld177-at-luxor-temple-part-4-from-model-creation-to-presentation" > here </a>.
+               Past <a href="https://ommphoto.ca/openseadragon_test/inscription_viewer.html"> incarnations </a> experiment with content from the tomb of Qar and Idu, and a digital publication can be found <a href="https://www.digital-epigraphy.com/publications/the-mastabas-of-qar-and-idu-g-7101-and-7102-digitally-revised-and-enhanced-edition">here</a>.
+            </p>
+            <p>
+              This remains an early concept piece, and has not been widely tested nor is it yet optimized for mobile and accessibility standards.
+            </p>
+
+            <div>
+              <h2>
+                Credits
+              </h2>
+
+
+              <p>All code is open source but any textual and image data presented remains the copyright of <a href="https://oi.uchicago.edu/research/projects/epigraphic-survey"> Epigraphic Survey & The Oriental Institute of the University of Chicago</a> in cooperation with the <a href="https://egymonuments.gov.eg"> Egyptian Ministry of Tourism and Antiquities</a></p>
+
+
+              <p>
+                The interface is built with <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">BootStrap 5.0</a>; 3D interactions are derived from the <a href="https://sketchfab.com/developers">SketchFab API</a> as well as customized code. This demo uses <a href="https://openseadragon.github.io">OpenSeaDragon</a> version.2.4.2 with a modified version of the excellent openseadragon-curtain-sync along with code adapted from:
+              </p>
+                <a href="https://openseadragon.github.io/examples/viewport-coordinates/"> https://openseadragon.github.io/examples/viewport-coordinates</a><br>
+                <a href="https://www.kirupa.com/html5/drag.htm">https://www.kirupa.com/html5/drag.htm</a><br>
+                <a href="https://openseadragon.github.io/examples/viewport-coordinates/">https://openseadragon.github.io/examples/viewport-coordinates/</a><br>
+                <a href="https://pages.nist.gov/OpenSeadragonScalebar/">https://pages.nist.gov/OpenSeadragonScalebar/</a><br>
+                and <a href="https://codepen.io/Pustur/pen/mPNoWx">https://codepen.io/Pustur/pen/mPNoWx</a>.
+              <p>
+              </p>
+                <p>
+                The code presented here is <b>very much a work in progress</b> and will be made freely available through github.
+              </p>
+              <p>
+                Laser scans by Luke Hollis; Photogrammetry, archive and model preparation by Owen Murray; translation, transliteration and description by Ariel Singer; custom code by Alexis Pantos.
+              </p>
+            </div>
+
+            <div>
+              <h2>
+                Feedback & Collaboration
+              </h2>
+              <p>
+                Interested in joining the conversation? Help us answer questions and improve this digital publication prototype by providing your <a href="https://forms.gle/7PSQb6FjcENichB49">feedback</a>. We’d love to hear your thoughts, input and insights.
+              </p>
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- UI stuff.  jQuery first,  then Bootstrap bundled with Popper-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+
+<!--findme debug: offline js
+  <script src="js/jquery-3.6.0.min">
+  <script src="js/bootstrap.min.js">
+  <script src="js/bootstrap.bundle.js">
+-->
+
+    <!-- Open Seadragon -->
+    <script src="js/openseadragon-bin-2.4.2/openseadragon.min.js"></script>
+    <script src="js/openseadragon-curtain-sync-mod.js"></script>
+    <script src="js/openseadragon-svg-overlay.js"></script>
+    <script src="js/OpenSeadragonScalebar-master/openseadragon-scalebar.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+
+    <!--SketchFab -->
+    <!-- findme note: the script that runs the viewer. Downloaded from the sketchfab website
+          must be called before the initialization code below-->
+    <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.8.2.js"></script>
+    <script type="text/javascript" src="js/sketchfab-viewer-1.8.2.js"></script>
+
+    <!-- the script. includes a call to the sketchfab api script requires certain variables passed, such as uid of the model to be used etc. other data like textures it picks from the html ids-->
+    <script id="texture_mixer" type="text/javascript" src="js/skfb_texture_swap-channels.js" data-max="4096" data-mid="1024" data-min="256" data-uid="e8263b15eba941bba16ec61c24a198f4" data-ver="1.8.2"></script>
+
+
+    <script type="text/javascript">
+
+
+      var aboutModal = new bootstrap.Modal(document.getElementById('aboutModal'), {
+        keyboard: false
+      })
+
+
+        /* UI handlers */
+        $('#viewer-toggle').click(function() {
+          if ($(this).hasClass('active')){
+            $('html, body').animate({
+              scrollTop: $('#discussion').offset().top - 50
+            }, 800, function(){
+            });
+          } else {
+            $('html, body').animate({
+              scrollTop: 0
+            }, 800, function(){
+            });
+          }
+          // $(this).toggleClass('active'); // styling is handled by the scroll handler
+        });
+
+
+        /* overlay click handler */
+        $('.tools-line').click(function() {
+          var line = '#svg-' + $(this).attr('id');
+          $('.highlight').addClass('highlight-hidden');
+          $(line).removeClass('highlight-hidden');
+          $('.translit-highlight').removeClass('translit-highlight');
+          $(this).toggleClass('translit-highlight');
+        });
+
+        /* clears the highlight when the tab is closed */
+        /* findme to do: introduce better managment to auto show an item on first selection and remmeber hilights*/
+        $('#btn-translit').click(function() {
+          $('.highlight').addClass('highlight-hidden');
+          $('.translit-highlight').removeClass('translit-highlight');
+        });
+
+
+        function scrollChecks () {
+          // findme ref: based on https://codepen.io/Pustur/pen/mPNoWx
+          const yPosition = $(window).scrollTop();
+  //      const yOffset = $("#discussion").offset().top - 105; // when the top of the title is breacked
+          const yOffset = $("#title").height(); // then the height of the title is moved
+
+          if ( yPosition >= yOffset && $(".animate-top").hasClass('toggle-offset') ){
+            $(".animate-top").removeClass('toggle-offset');
+            $("#viewer-toggle").html("Scene Viewer &#9650;");
+            $("#viewer-toggle").removeClass('active').addClass('toggle-bright');
+          }else if ( yPosition <= yOffset && !$(".animate-top").hasClass('toggle-offset') ) {
+            $(".animate-top").addClass('toggle-offset');
+            $("#viewer-toggle").html("Text and Commentary &#9660;");
+            $("#viewer-toggle").addClass('active').removeClass('toggle-bright');
+          }
+
+        }
+
+        /* check to apply ui changes for navigation buttons etc */
+        $(window).on('scroll', scrollChecks);
+
+
+        /*
+          footnote handler. Shows/Hides pre-written inline footnote divs
+          Must be called through the document to handle dynamically added elements
+        */
+        $(document).on("click",".note", function () {
+          var id = '#footnote-'+ $(this).text();
+          console.log('footnote '+ id);
+          $(id).toggleClass('d-none');
+        });
+
+
+            /* =================================================
+            findme ref: original code based on https://github.com/cuberis/openseadragon-curtain-sync
+            please see original license if you wish to use this code.
+            ================================================= */
+
+            /* findme note: arguments used by the viewer
+             =================================================
+             "images" – images used by the viewer (2 or more).
+             "key" (string) - a unique string used to target this image. a layer name of sorts.
+             "shown" (boolean) - whether the image is on/off when page is loaded.
+             "isCurtain" – whether the images is a curtain image (split) or not (an overlay layer)"
+             only 3 curtain layers can be handled in this system.
+             you can have as many overlay layers, but need to add the control bars to use them
+            */
+
+
+            /*
+              =================================================
+              historical imagery viewer
+              =================================================
+            */
+
+            /*
+              when the tab is clicked check if the gallery is already set,
+              if not initialse the Viewer this adds a small cost in the first display
+              but is a workaround for issues with the initializing when
+              the viewer is hidden on page load
+            */
+
+              /* initialise the gallery variable so it is available but unset */
+              var osdGalleryViewer
+              /* sets a global variable for the tilesources used and fills with the first scenes data */
+              var galleryTileSources = ['manifests/entrance_1303.json','manifests/entrance_pl82.json'];
+
+              /* seperate function to initialze gallery only when made visible to prevent position issues. Also called in the sketchfab swap js */
+              function initialiseGallery() {
+                if (osdGalleryViewer == undefined){
+                  /* the gallery viewer */
+                  osdGalleryViewer = OpenSeadragon({
+                    id: 'osd-gallery-viewer',
+                    tileSources: galleryTileSources,
+                    sequenceMode: true,
+                    showReferenceStrip: true,
+                    referenceStripScroll: 'vertical',
+                    showSequenceControl: false,
+                    preserveViewport: true,
+                    showNavigator:false,
+                    showNavigationControl: false,
+                    blendTime: 3
+                  });
+
+
+
+                  /* handler to call in the manfiest file description data */
+                  osdGalleryViewer.addHandler('open', function (event) {
+                    var tileSource = osdGalleryViewer.world.getItemAt(0).source;
+                    tileSourceArr = tileSource['@id'].split('/');
+                    sourceID = tileSourceArr[tileSourceArr.length -1];
+
+                    console.log('set comments!');
+
+
+                    if (tileSource['description'] != undefined){
+                      theText = tileSource['description'];
+
+
+                      //findme todo: basic shim to split the text onto new lines
+                      // replace with better iiif confirmance
+                      theText = theText.replaceAll(";","<br>");
+
+                      console.log(theText);
+                      $("#description").html(theText);
+                      console.log(tileSource['description']);
+                    }else{
+                      $("#description").text('');
+                      console.log('nothing');
+                    }
+
+
+                  });
+                }else{
+                  /* if the gallery already exists, open images for this scene (relies on OS caching to handle already open images)*/
+                  osdGalleryViewer.open(
+                  galleryTileSources
+                  ,0);
+                }
+
+
+              }
+
+
+
+
+
+              $(".scene-enabled").click( function() {
+
+                if ($(this).attr('id') == 'about') {
+                  aboutModal.show();
+                }else{
+                  if(!$(this).hasClass('scene-active')){
+                    selectScene($(this).attr("data-index-number"));
+                    console.log("data index", $(this).attr("data-index-number"))
+                  }
+                }
+              });
+
+
+              $('#gallery-tab').click(function() {
+                /* handles the tab swap without messing up osd positioning */
+
+                $('#osd-gallery-container').removeClass('invisible');
+                $('#osd-container').addClass('invisible');
+
+                initialiseGallery(); //only runs if not already initialisted
+
+              });
+
+
+
+
+  /*
+    =================================================
+    inscription viewer
+    =================================================
+  */
+              //findme cleanup: does this index do anything???
+              index=0;
+
+
+              function makeCurtainSyncViewer(tileSources,i) {
+                      var containerTag = '#osd-viewer-' + i;
+                      osdViewerTemplate = new CurtainSyncViewer({
+
+                        // default options
+
+                        container: document.querySelector(containerTag),
+
+
+                        images: [
+                          {
+                            key: 'my-key-1',
+                            tileSource: tileSources[0],
+
+                            shown: true,
+                            isCurtain: true
+                          },
+                          {
+                            key: 'my-key-2',
+                            tileSource: tileSources[1],
+                            shown: true,
+                            isCurtain: true
+                          },
+                          {
+                            key: 'my-key-3',
+                            tileSource: tileSources[2],
+                            shown: false,
+                            isCurtain: false,
+
+                          },
+                          {
+                            key: 'my-key-4',
+                            tileSource: tileSources[3],
+                            shown: false,
+                            isCurtain: false
+                          }
+                        ],
+
+                        /*
+                          findme note: base OpenSeaDragon options also see https://openseadragon.github.io/docs/OpenSeadragon.html#.Options
+                        */
+
+                        osdOptions: {
+                          id: "osd-viewer-" + i,
+                          showNavigator:false,
+                          showNavigationControl: false,
+                          zoomPerClick: 2,
+                          overlays: [{
+                            id: 'global-overlay',
+                             px: 0,
+                             py: 0,
+                             width: 500,
+                             height: 500,
+                             className: 'highlight'
+                          }]
+                        }
+
+                      });
+                      return osdViewerTemplate;
+                  }
+
+
+                  //initializes the first viewer
+                  tileSources = ['manifests/pl83_photo.json','manifests/pl82_archive.json','manifests/pl83_drawing.json','manifests/pl82_archive.json'];
+                  var osdViewer0 = makeCurtainSyncViewer(tileSources,0);
+                  //initialises the currentViewer variable and assigns it to the first one.
+                  //This is used by the sliders for fading the different images.
+                  currentViewer = osdViewer0;
+
+                  /* initialise the other viewers for each scene so they exist but are unset */
+                  // findme todo: replace
+                  var osdViewer1;
+                  var osdViewer2;
+                  var osdViewer3;
+                  var osdViewer4;
+
+
+  //                findme todo: move this somwhere else?
+                  /*findme note: setup the layer opacity slider listeners*/
+                  var layerSlider = document.getElementById("layer-slider01");
+                  layerSlider.oninput = function() {
+                      currentViewer.setLayerOpacity(0,layerSlider.value/100,false);
+                  }
+
+  //                findme todo: move this somwhere else?
+                  /* findme note: setup the layer opacity slider listeners for split-view images */
+                  var splitLayerSlider = document.getElementById("split-layer-slider01");
+                  splitLayerSlider.oninput = function() {
+                      currentViewer.setLayerOpacity(1,splitLayerSlider.value/100,true);
+                  }
+
+
+                  /* handles switch between viewers without messing up positioning */
+                  $('#inscription-tab').click(function() {
+                    $('#osd-container').removeClass('invisible');
+                    $('#osd-gallery-container').addClass('invisible');
+                  });
+
+
+                  $('#btn-toggle-sidebar').click(function(){
+                    $('#sidebar').toggleClass("sidebar-hidden");
+                    $('.viewer-tools').toggleClass("end-0");
+                  });
+
+
+                  //findme temp: temp fade out toggle to simulate switch between annotations
+                  $('#btn-toggle-hide').click( function(){
+
+
+                    });
+
+  // FINDME TODO: TIDY UP AND MOVE into skfb annotation click events.
+  //findme to do:  add https://split.js.org/#/split-grid  for resizable frames
+  /* findme to do:: enable dynamic overlay addition
+                var overlay = false;
+                document.querySelector('#btn-toggle-overlay').addEventListener('click', function() {
+                    if (overlay) {
+                        osdViewer.removeOverlay("runtime-overlay");
+                    } else {
+                        var elt = document.createElement("div");
+                        elt.id = "runtime-overlay";
+                        elt.className = "highlight";
+                        osdViewer.addOverlay({
+                            element: elt,
+                            location: new OpenSeadragon.Rect(0.33, 0.75, 0.2, 0.25)
+                        });
+                    }
+                    overlay = !overlay;
+                });
+  */
+
+
+
+
+              //findme to-do: paramatize to pass in array object and build.
+              //findme to-do: modify to use polygon clipping to identify areas? https://openseadragon.github.io/examples/ui-tiledimage-polygon-cropping/
+            /*  var elt = document.createElement("div");
+                elt.id = "runtime-overlay";
+                elt.className = "highlight highlight-hidden";
+                osdViewer.getViewer().addOverlay({
+                    element: elt,
+                    location: new OpenSeadragon.Rect(0.0138, 0.07, 0.535, 0.045)
+                });*/
+
+
+                /*findme debug:
+                svgOverlay.onClick(d3Rect.node(), function() {
+                    console.log('click', arguments);
+                });
+                */
+
+                $(window).resize(function() {
+                    svgOverlay.resize();
+                });
+
+
+
+
+                // set up the scalebar for the viewer
+                osdViewer0.getViewer().scalebar({
+                  minWidth: '200px',
+                  pixelsPerMeter: 5197.5,
+                  color: '#000',
+                  barThickness: 5,
+                  stayInsideImage: 1,
+                  backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                  xOffset: 10,
+                  yOffset: 70,
+                  location: OpenSeadragon.ScalebarLocation.TOP_LEFT,
+                  stayInsideImage: false,
+                  type: 'microscopy'
+                });
+
+
+                // load the first set of text
+                $.get('pages/page01.txt', function (data) {
+                    $("#text-container").html(data);
+                });
+
+
+      </script>
+
+      <div class="beta h1 fs-bold">
+        beta
+      </div>
+  </body>
+</html>

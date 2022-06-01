@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  font-family: Arial, sans-serif;
+}
+
+.btn {
+  background: gainsboro;
+  border: none;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+  padding: 8px 12px;
+  border-radius: 2px;
+  margin-right: 2px;
+}
+
+nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: 12px;
+}
+
+nav div {
+  margin-bottom: 24px;
+}
+
+nav span {
+  display: block;
+  color: white;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+#viewer {
+  height: 100vh;
+}
+
+.view-trigger.active,
+.mode-trigger.active {
+  background-color: darkslateblue;
+  color: white;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  color: white;
+  font-size: 10px;
+}

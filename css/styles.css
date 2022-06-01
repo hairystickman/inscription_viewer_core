@@ -1,0 +1,483 @@
+html, body {
+  height:100%;
+  font-family: 'Noto Serif', serif!important; /*overide for the Bootstrap auto font managment*/
+}
+
+.bg-dark a, .viewer-tools a {
+    color: rgba(120,140,160,1)!important;
+}
+
+.bg-dark a:visited, .viewer-tools a:visited {
+    color: #9de!important;
+
+
+  }
+button {
+  font-family: 'Noto sans', sans-serif !important;
+}
+
+h1 {
+  font-size: 2rem!important;
+}
+
+h4>sup{
+  font-size:0.75rem !important;
+  top:-0.75rem !important;
+}
+
+.sans-bold {
+  font-family: 'Noto sans', sans-serif;
+  font-weight: 600;
+}
+
+.osd-container{
+  position-absolute;
+}
+
+@media only screen and (min-width: 1000px) {
+  .container {
+    max-width: 860px !important;
+  }
+}
+
+.note {
+  color: #eee;
+  font-weight: 800;
+  margin-left: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color:rgba(20,90,130,1);
+  cursor: pointer;
+}
+
+.footnotes {
+  background-color: rgba(120,140,160,1);
+}
+
+.inline-footnote {
+  display: block;
+  background-color: rgba(120,140,160,1);
+}
+
+/* findme, temp fix until redefiniation of styles */
+.body-transliteration {
+  margin-bottom: 0.25rem !important;
+}
+
+.fullscreen {
+  background-color:#222;
+  position:absolute;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
+}
+
+.toggle-offset {
+  top: -120px!important;
+}
+
+.page-title {
+  z-index: 10000;
+  background-color:rgba(50,50,50,0.9);
+  color:white;
+}
+
+.toggle-bright{
+  background-color:rgba(20,90,130,1) !important;
+  color: #fff !important;
+}
+
+#viewer-area{
+  background-color: #222;
+  /*needed to stop sidebar from making the page scroll*/
+  overflow: hidden;
+}
+
+.viewer-tools {
+  transition: right 0.2s;
+  right:410px;
+  z-index: 1060; /* 10 above the nubbin */
+}
+
+.viewer-tools .accordion-item {
+  background-color: transparent;
+  border:0;
+}
+
+/* bootstrap accordion button overides */
+.viewer-tools .accordion-button, .viewer-tools .accordion-button:not(.collapsed) {
+    background-color: #222;
+    width:auto;
+    border-radius: 5px 5px 0 0 !important;
+}
+
+.viewer-tools .accordion-header {
+  border-bottom:solid #222 10px;
+}
+
+.viewer-tools .accordion-body {
+    color: white;
+    background:rgba(0,0,0,0.4);
+}
+
+
+.nav-pills {
+    border-top: solid 5px rgba(20,90,130,1) !important;
+    z-index: 1010; /* above the sidebar */
+}
+
+.nav-pills .nav-link {
+  transition: width 0.2s;
+}
+
+.nav-pills .nav-link.active {
+  background-color:rgba(20,90,130,1) !important;
+  color: black;
+}
+
+.nav-pills .nav-link, .nav-pills .show>.nav-link {
+  background-color:rgba(120,140,160,1) !important;
+  color: black;
+}
+
+.animate-top {
+  position:relative;
+  transition: top 0.5s;
+  top: 0px;
+}
+
+
+
+.text-ui {
+    font-family: 'Noto Sans', sans-serif!important; /*overide for the Bootstrap auto font managment*/
+}
+
+.full-height {
+  height:100%;
+}
+
+#viewer-inner {
+  /*findme todo: this is a horribl shim, make better */
+  bottom:137px;
+}
+
+.nubbin {
+  width:40px;
+  height:40px;
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  background-color:rgba(20,90,130,1);
+  border: 1px solid #fff;
+  cursor:move;
+  z-index: 1050;
+  border-radius: 60px;
+}
+
+.nubbin:active {
+  background-color:#444;
+  border: 1px #eee solid;
+}
+
+.nubbin:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-40px;
+  height:120px;
+  width:2px;
+  background-color:rgba(20,90,130,1);
+  z-index: 999;
+}
+
+/* findme to do: toggle this when 3 way split is enabled
+.nubbin:before{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:-50px;
+  height:1px;
+  width:160px;
+  background-color:#fff;
+}
+
+*/
+
+.layers {
+  background-color:rgb(0,0,0,0.6);
+}
+
+.layer-slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 80% !important;
+  height: 10px!important; /* Specified height */
+  background: #888; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  border-radius: 50px;
+  max-width:400px;
+}
+
+.tools-transliterations {
+  max-height: 300px;
+  overflow:auto;
+}
+
+.tools-transliterations .container {
+  /* shim to make inactive text more obvious */
+  color:#bbb;
+}
+
+
+/*this is an additinoal script tool - lines of inscriptions - used in the transliteration overlay to show location of the text*/
+.tools-line {
+  cursor : pointer;
+  color : #fff ;
+  text-decoration:underline;
+}
+
+
+.flex-overide {
+  /*custom ovieride to make bootstrap accordion centre text */
+  display:block !important;
+}
+
+.slider-container{
+  text-align:center;
+}
+
+
+/* Mouse-over effects */
+.layer-slider:hover {
+  background-color: #fff;
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.layer-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.layer-slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+
+
+.sidebar-btn {
+  transform-origin: 0 0;
+  transform: rotate(90deg);
+  max-width:500px;
+  top:70px;
+  position:absolute;
+}
+
+.sidebar-hidden {
+  width: 0px !important;
+}
+
+.sidebar-dimensions {
+  width: 410px;
+}
+
+/*
+.sidebar-inner{
+  right:0;
+  bottom:0;
+  top:0;
+}*/
+
+.sidebar {
+  z-index:1000;
+  bottom:135px;
+  transition: width 0.2s;
+  right:0;
+  background-color: rgba(20,20,20,0.9);
+  padding-top:50px;
+  padding-left:0;
+  padding-right:0;
+  border-left:solid #222 10px;
+  /* box-sizing:content-box;  a fix bootstrap issues with auto something*/
+}
+
+/* stops content dancing around when sidebar is shown/hidden*/
+.sidebar div {
+  width:400px;
+}
+
+
+.viewer-skfb {
+  width: 400px;
+  height:400px;
+  background-color: #fff;
+}
+
+
+.scenes {
+    position:absolute;
+    top:450px; /*findme todo: this is based on arbitrary frame size for  skfb viewer.*/
+    bottom:0;
+    color: #eee;
+    overflow:auto;
+    box-sizing:content-box; /* a fix bootstrap issues with auto something*/
+
+    scrollbar-width: thin;
+    scrollbar-color: #666 #222;
+}
+
+.scene-disabled {
+  color: #444;
+
+}
+
+.scene-enabled {
+  cursor:pointer;
+}
+
+.scene-active{
+  background-color: rgba(20,90,130,1) !important;
+}
+
+.grad-top {
+  position:absolute;
+  left:0;
+  right:0;
+  top:450px;
+  height: 50px;
+  background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0));
+}
+
+.grad-bottom {
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height: 50px;
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
+}
+
+/* findme todo: adjust so that it displays outside works outside the viewer
+.sidebar-inner:after {
+  content: 'Scene Selector';
+  transform-origin: 0 0;
+  transform: rotate(90deg);
+  max-width:500px;
+  top:70px;
+  position:absolute;
+  color: #eee;
+  background-color: #111;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-sizing:content-box;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+*/
+
+.transliterations {
+  height:500px;
+  overflow:scroll;
+  border: 1px solid grey;
+}
+
+.highlight {
+  background: none;
+  stroke: #429ce9;
+  /*outline: 10px solid #429ce9;  findme todo: the border size of the polygon is influenced by the OSD canvas*/
+  opacity: 0.6;
+  z-index: 1020;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.highlight-hidden {
+  opacity:0;
+}
+
+.translit-highlight {
+  background: #429ce9;
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out;
+}
+
+/* the isncription viewer */
+#osd-container {
+  opacity:1;
+  background-color: #eee;
+  clip-path: inset(0 0 0 0);
+  -webkit-transition: opacity 0.8s ease-in-out, clip-path 0.8s ease-in-out;
+  -moz-transition: opacity 0.8s ease-in-out, clip-path 0.8s ease-in-out;
+  transition: opacity 0.8s ease-in-out, clip-path 0.8s ease-in-out;
+}
+
+#osd-gallery-viewer {
+  -webkit-transition: margin-top 0.8s ease-in-out;
+  -moz-transition: margin-top 0.8s ease-in-out;
+  transition: margin-top 0.8s ease-in-out;
+}
+
+#osd-gallery-viewer .openseadragon-container{
+  background-color: #333 !important;
+}
+
+/* overide to defualt bootstrap tab handling that confuses the osd sizing */
+.tab-content>.tab-pane {
+  display: block!important;
+}
+
+footer {
+  height: 200px;
+  background-color:rgba(20,90,130,1);
+}
+
+
+
+@media only screen and (max-width: 500px) {
+  .sidebar div {
+    width:200px;
+  }
+  .viewer-skfb {
+    width:200px;
+    height:200px;
+  }
+}
+
+/*additional z-index to make sure modal is on top of everything*/
+.modal {
+  z-index: 5000!important;
+}
+
+/* floating lable for */
+
+/*digdig branding*/
+.beta {
+  display: block;
+  position: fixed;
+  transform: rotate(45deg);
+  bottom: -0px;
+  left: -150px;
+  width: 400px;
+  height: 100px;
+  opacity:0.8;
+  background-color: #eee;
+  z-index:5000;
+  text-align: center;
+  padding-left:150px;
+  padding-right:150px;
+  padding-top:10px;
+}

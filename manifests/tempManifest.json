@@ -1,0 +1,68 @@
+{
+  "description": "Cemetery G 7000: G 7102, Idu, inscribed architrave over chapel entrance, beginning to emerge during excavation, looking S",
+  "@context": "https://iiif.io/api/presentation/2/context.json",
+  "@id": "http://giza.fas.harvard.edu/manifests/photos-30678",
+  "label": "Eastern Cemetery",
+  "@type": "sc:Manifest",
+  "metadata": [
+    {
+      "label": "ID",
+      "value": "HUMFA_B5575_NS"
+    },
+    {
+      "label": "Department",
+      "value": "Harvard University-Boston Museum of Fine Arts Expedition"
+    },
+    {
+      "label": "Subjects",
+      "value": "Eastern Cemetery: Site: Giza; View: G 7102"
+    },
+    {
+      "label": "Date",
+      "value": "01/10/1925"
+    },
+    {
+      "label": "Problems/Questions",
+      "value": "description expanded based on image content"
+    },
+    {
+      "label": "Photographer",
+      "value": "Mohammedani Ibrahim"
+    }
+  ],
+  "sequences": [
+    {
+      "label": "Default order",
+      "@type": "sc:Sequence",
+      "@id": "http://giza.fas.harvard.edu/manifests/photos-30678/sequence/0",
+      "canvases": [
+        {
+          "@id": "http://giza.fas.harvard.edu/manifests/photos-30678/canvas/0",
+          "label": "1",
+          "@type": "sc:Canvas",
+          "width": 2641,
+          "height": 1881,
+          "images": [
+            {
+              "on": "http://giza.fas.harvard.edu/manifests/photos-30678/canvas/0",
+              "motivation": "sc:painting",
+              "@type": "oa:Annotation",
+              "@id": "http://giza.fas.harvard.edu/manifests/photos-30678/annotation/canvas/0",
+              "resource": {
+                "width": 2641,
+                "@id": "https://ids.lib.harvard.edu/ids/iiif/460181374/full/full/0/default.jpg",
+                "@type": "dctypes:Image",
+                "height": 1881,
+                "service": {
+                  "@context": "https://iiif.io/api/presentation/2/context.json",
+                  "@id": "https://ids.lib.harvard.edu/ids/iiif/460181374",
+                  "profile": "http://iiif.io/api/image/2/level1.json"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

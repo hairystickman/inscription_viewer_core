@@ -1,0 +1,26 @@
+<div id="text-body" class="container mt-5 mb-5 pb-5">
+		<h2 id ="title-body" class="text-center p-3">
+		Plate 1: forthcoming
+		</h2>
+
+		<div class="pt-5">
+			<h3>Plate 1: forthcoming</h3>
+		<p>
+			Prepartion status:
+		</p>
+		<div class="progress">
+  			<div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+		<p>
+			Expected completion date: tbc
+		</p>
+	</div>
+</div>
+
+
+
+<div class="py-5 footnotes w-100 text-light">
+	<div class="container">
+
+	</div>
+</div>

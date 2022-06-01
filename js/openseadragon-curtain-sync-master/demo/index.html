@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <nav>
+      <!-- Zoom controls -->
+      <div>
+        <span>Zoom</span>
+        <button class="btn zoom-trigger" data-type="in" title="Zoom In">Zoom In</button>
+        <button class="btn zoom-trigger" data-type="out" title="Zoom Out">Zoom Out</button>
+      </div>
+
+      <!-- Type controls -->
+      <div>
+        <span>Views</span>
+        <button class="btn view-trigger active" data-type="vis" title="Visible">Vis</button>
+        <button class="btn view-trigger active" data-type="xra" title="X-ray">Xray</button>
+        <button class="btn view-trigger" data-type="irr" title="Infrared">Ir</button>
+      </div>
+
+      <!-- Mode toggles -->
+      <div>
+        <span>Modes</span>
+        <button class="btn active mode-trigger mode-curtain" data-mode="curtain" title="Curtain Mode">Curtain</button>
+        <button class="btn mode-trigger mode-syncs" data-mode="sync" title="Sync Mode">Sync</button>
+      </div>
+    </nav>
+
+    <!-- Viewer Element -->
+    <div id="viewer"></div>
+    <div class="copyright">* All images courtesy of The Leiden Collection</div>
+
+    <!-- OpenSeadragon from CDN and Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/openseadragon.min.js"></script>
+    <script src="../src/openseadragon-curtain-sync.min.js"></script>
+
+    <!-- Demo Specific Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="scripts.js"></script>
+
+    <!-- Initialize Viewer -->
+    <script type="text/javascript">
+
+      var viewer = new CurtainSyncViewer({
+        container: document.querySelector('#viewer'),
+        images: [
+          {
+            key: 'vis',
+            tileSource: 'https://theleidencollection.iiifhosting.com/iiif/8e3d19d335208e49762884ef22f748f105d656f6bff9229e2d45ce0dd18a8fe/info.json',
+            shown: true
+          },
+          {
+            key: 'xra',
+            tileSource: 'https://theleidencollection.iiifhosting.com/iiif/414651b43289b76c10777455db288ed5b43eae4c1818b52c90fb316db3b20075/info.json',
+            shown: true
+          },
+          {
+            key: 'irr',
+            tileSource: 'https://theleidencollection.iiifhosting.com/iiif/7bf215d80e55221b9ad70edd504d717c5ba93d6455cb863c647a1e94f34c6179/info.json',
+          }
+        ]
+      });
+
+    </script>
+  </body>
+</html>

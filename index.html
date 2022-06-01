@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google API fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+
+    <!-- findme to do: tidy up Skfb API CSS -->
+    <link rel="stylesheet" href="css/styles.css" >
+    <link rel="stylesheet" href="css/skfb_texture_swap.css" >
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+
+<!-- findme debug: offline css libraries
+    <link href="js/offline/bootstrap.min.css" rel="stylesheet">
+-->
+
+
+    <title>The King's Chamber: A Prototype</title>
+  </head>
+  <body>
+
+
+
+    <h1 id ="title" class="page-title position-absolute w-100 p-5 fs-sm" style="top:200px">The King's Chamber: A Prototype</h1>
+
+
+    <!-- ########################
+      scene viewer
+    ######################## -->
+    <div id="viewer-area" class="container-fluid position-relative h-100 p-0 m-0" style="background-size: cover; background-image:url('images/coverimage.jpg');   background-position: center top; height:100% ">
+
+      </div>
+
+
+<!-- ########################
+  page text
+######################## -->
+
+
+    <div id="text-container">
+      <div id="text-body" class="container mt-5 mb-5 pb-5">
+        <h2 id="body-title" class="text-center p-3">About this Prototype</h2>
+        <h3>Origins</h3>
+        <p>
+          How can 3D publishing programs work hand-in-hand to augment traditional 2D print publications?
+        </p>
+        <p>
+          Can one publish a descriptive volume in a modular format that is both visually cohesive and functional and that doesn’t require all of the other component parts to be there first?
+        </p>
+        <p>
+          The effort to answer these questions – a series of ongoing conversations and collaboration between colleagues - has resulted in this open source web-based experimental viewer. It presents a platform for presenting contextual geospatial relationships (in 3D) and examination of their surface details (in 2D).
+        </p>
+        <p>
+          This prototype tool marries 2D imagery and 3D models with available linked data. It is built around the open source <a href="https://iiif.io"> IIIF</a> format, using <a href="https://openseadragon.github.io">OpenSeaDragon</a> and <a href="https://sketchfab.com/developers">SketchFab API</a>, integrating current best practice documentation techniques with archival imagery from the Epigraphic Survey’s Photo Archive, Large Format Collection & <a href="https://oi.uchicago.edu/research/publications/oip/medinet-habu-ix-eighteenth-dynasty-temple-part-i-inner-sanctuaries">OIP 136 Medinet Habu IX. The Eighteenth Dynasty Temple, Part I: The Inner Sanctuaries With Translations of Texts, Commentary, and Glossary</a>
+        </p>
+        <h3>Futures</h3>
+        <p>
+          This is the latest iteration, whose origins can be read about <a href="https://www.digital-epigraphy.com/projects/documenting-the-amenhotep-iii-wall-scene-ld177-at-luxor-temple-part-4-from-model-creation-to-presentation" > here </a>.
+           Past <a href="https://ommphoto.ca/openseadragon_test/inscription_viewer.html"> incarnations </a> experiment with content from the tomb of Qar and Idu, and a digital publication can be found <a href="https://www.digital-epigraphy.com/publications/the-mastabas-of-qar-and-idu-g-7101-and-7102-digitally-revised-and-enhanced-edition">here</a>.
+        </p>
+        <p>
+          This remains an early concept piece, and has not been widely tested nor is it yet optimized for mobile and accessibility standards.
+        </p>
+
+        <a href="kings_chamber.html" class="btn btn-lg btn-block btn-secondary w-100 sans-bold my-5" role="button"><h3 style="font-family:'Noto Serif', serif!important">Launch prototype</h3></a>
+
+
+        <div>
+          <h2>
+            Credits
+          </h2>
+
+
+          <p>All code is open source but any textual and image data presented remains the copyright of <a href="https://oi.uchicago.edu/research/projects/epigraphic-survey"> Epigraphic Survey & The Oriental Institute of the University of Chicago</a> in cooperation with the <a href="https://egymonuments.gov.eg"> Egyptian Ministry of Tourism and Antiquities</a></p>
+
+
+          <p>
+            The interface is built with <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">BootStrap 5.0</a>; 3D interactions are derived from the <a href="https://sketchfab.com/developers">SketchFab API</a> as well as customized code. This demo uses <a href="https://openseadragon.github.io">OpenSeaDragon</a> version.2.4.2 with a modified version of the excellent openseadragon-curtain-sync along with code adapted from:
+          </p>
+            <a href="https://openseadragon.github.io/examples/viewport-coordinates/"> https://openseadragon.github.io/examples/viewport-coordinates</a><br>
+            <a href="https://www.kirupa.com/html5/drag.htm">https://www.kirupa.com/html5/drag.htm</a><br>
+            <a href="https://openseadragon.github.io/examples/viewport-coordinates/">https://openseadragon.github.io/examples/viewport-coordinates/</a><br>
+            <a href="https://pages.nist.gov/OpenSeadragonScalebar/">https://pages.nist.gov/OpenSeadragonScalebar/</a><br>
+            and <a href="https://codepen.io/Pustur/pen/mPNoWx">https://codepen.io/Pustur/pen/mPNoWx</a>.
+          <p>
+          </p>
+            <p>
+            The code presented here is <b>very much a work in progress</b> and will be made freely available through github.
+          </p>
+          <p>
+            Laser scans by Luke Hollis; Photogrammetry, archive and model preparation by Owen Murray; translation, transliteration and description by Ariel Singer; custom code by Alexis Pantos.
+          </p>
+        </div>
+
+        <div>
+          <h2>
+            Feedback & Collaboration
+          </h2>
+          <p>
+            Interested in joining the conversation? Help us answer questions and improve this digital publication prototype by providing your <a href="https://forms.gle/7PSQb6FjcENichB49">feedback</a>. We’d love to hear your thoughts, input and insights.
+          </p>
+        </div>
+      </div>
+
+      <footer class="footer w-100 m-0 pt-5 text-light text-center fs-3">
+          <div>logos and branding</div>
+      </footer>
+
+    </div>
+
+
+    <!-- UI stuff.  jQuery first,  then Bootstrap bundled with Popper-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+
+  </body>
+</html>
